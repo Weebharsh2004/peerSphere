@@ -25,4 +25,4 @@ Peersphere is a social platform that allows users to connect, share posts, and e
 1. Clone the repository.
 
    ```bash
-   git clone https://github.com/your-username/peersphere.git
+   git clone https://github.com/Weebharsh2004/peerSphere.git
