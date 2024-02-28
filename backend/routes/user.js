@@ -124,6 +124,16 @@ router.post('/posts', verifyToken, validatePost, async (req, res) => {
     }
 });
 
+router.get('/allposts', async(req,res)=>{
+    try {
+        const posts = await Post.find().populate('author', 'username'); // Assuming 'author' is the reference field in the Post model pointing to the User model
+        res.status(200).json(posts);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+})
+
 router.get('/search/:partialUsername',verifyToken,async (req,res)=>{
     try {
         const partialUsername= req.params.partialUsername;
@@ -262,6 +272,17 @@ router.post('/posts/comment/:postId', verifyToken,async (req,res)=>{
             msg:"comment faild"
         })
     }
+})
+
+router.get('/posts/getcomment/:postId',async (req,res)=>{
+    const postId=req.params.postId;
+
+    const post = await Post.findById(postId);
+    if (!post) {
+        return res.status(404).json({ msg: 'Post not found' });
+    }
+
+    res.json(post);
 })
 
 module.exports = router;

@@ -3,7 +3,6 @@ const secretKey = require('../secrets/token');
 
 const verifyToken = (req,res,next)=>{
     const token = req.header('authorization');
-
     if(!token){
         return res.status(401).json({
             err: "Access Denied, Token not provided",
